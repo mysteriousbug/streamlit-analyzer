@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from app.utils import summarize_data
+from utils import summarize_data
 
 st.title("📊 CSV Data Analyzer")
 
