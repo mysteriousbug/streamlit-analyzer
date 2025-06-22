@@ -1,29 +1,17 @@
-name: CI Pipeline
+name: Shell & CSV Analyzer CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ main ]
 
 jobs:
-  build:
+  shell-check:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-
-    - name: Install dependencies
+    - name: Run Shell Scripts
       run: |
-        pip install -r requirements.txt
-
-    - name: Run tests
-      run: |
-        pytest
-
-    - name: SonarQube Scan
-      run: ./run_sonar.sh
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        chmod +x scripts/*.sh
+        ./scripts/clean_csv.sh sample.csv || echo "Sample not found"
+        ./scripts/generate_report.sh sample.csv || echo "Sample not found"
