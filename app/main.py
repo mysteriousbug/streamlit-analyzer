@@ -3,7 +3,7 @@ import pandas as pd
 import subprocess
 import os
 
-st.set_page_config(layout="wide")
+#st.set_page_config(layout="wide")
 st.title("📊 Smart CSV Analyzer")
 
 uploaded_file = st.file_uploader("Upload your CSV", type=["csv"])
@@ -32,6 +32,6 @@ if uploaded_file:
         subprocess.run(["bash", "scripts/generate_report.sh", file_path])
         st.success("Report generated in /reports")
 
-    if st.button("🌀 Git Auto-Commit Report"):
-        subprocess.run(["bash", "scripts/git_logger.sh"])
-        st.success("Report committed to Git repository")
+    #if st.button("🌀 Git Auto-Commit Report"):
+    #    subprocess.run(["bash", "scripts/git_logger.sh"])
+    #    st.success("Report committed to Git repository")
