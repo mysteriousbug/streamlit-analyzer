@@ -3,6 +3,7 @@ import pandas as pd
 import subprocess
 import os
 
+st.set_page_config(layout="wide")
 st.title("📊 Smart CSV Analyzer")
 
 uploaded_file = st.file_uploader("Upload your CSV", type=["csv"])
