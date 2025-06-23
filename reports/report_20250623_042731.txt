@@ -1,0 +1,15 @@
+CSV Report for uploads/movies.csv
+=====================
+Column count: 9
+Row count: 108876
+
+Column Names:
+MOVIES
+YEAR
+GENRE
+RATING
+ONE-LINE
+STARS
+VOTES
+RunTime
+Gross
