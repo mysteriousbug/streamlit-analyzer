@@ -19,6 +19,8 @@ if uploaded_file:
 
     if st.button("🧹 Clean CSV"):
         subprocess.call(["bash", "scripts/clean_csv.sh", file_path])
+	st.success(f"Cleaned CSV saved to uploads/")
 
     if st.button("📄 Generate Report"):
         subprocess.call(["bash", "scripts/generate_report.sh", file_path])
+	st.success(f"Report saved to reports/")
