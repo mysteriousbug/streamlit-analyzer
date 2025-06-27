@@ -21,18 +21,16 @@ if uploaded_file:
 
     # Button to clean CSV
     if st.button("🧹 Clean CSV"):
-        result = subprocess.run(["bash", "scripts/clean_csv.sh", file_path], capture_output=True, text=True)
+        result = subprocess.run(["bash", "scripts/clean_csv.sh", file_path])
         if result.returncode == 0:
             st.success("✅ CSV cleaned successfully!")
-            st.code(result.stdout)
         else:
             st.error(f"❌ Error cleaning CSV:\n{result.stderr}")
 
     # Button to generate report
     if st.button("📄 Generate Report"):
-        result = subprocess.run(["bash", "scripts/generate_report.sh", file_path], capture_output=True, text=True)
+        result = subprocess.run(["bash", "scripts/generate_report.sh", file_path])
         if result.returncode == 0:
             st.success("✅ Report generated successfully!")
-            st.code(result.stdout)
         else:
             st.error(f"❌ Error generating report:\n{result.stderr}")
