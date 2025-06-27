@@ -1,14 +1,8 @@
 #!/bin/bash
-# Removes empty lines, trims spaces, converts to Unix format
 
-if [ "$#" -ne 1 ]; then
-  echo "Usage: $0 <csv_file>"
-  exit 1
-fi
+INPUT_FILE="$1"
+CLEANED_FILE="uploads/cleaned_$(basename $INPUT_FILE)"
 
-input="$1"
-cleaned="cleaned_$1"
+tr -d '\r' < "$INPUT_FILE" | sed '/^$/d' > "$CLEANED_FILE"
 
-tr -d '\r' < "$input" | sed '/^$/d' | sed 's/ *, */,/g' > "reports/$cleaned"
-
-echo "[INFO] Cleaned file saved to reports/$cleaned"
+echo "Cleaned CSV saved to $CLEANED_FILE"

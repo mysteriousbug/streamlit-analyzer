@@ -1,0 +1,19 @@
+#Commands to setup working directory
+mkdir streamlit-analyzer
+cd streamlit-analyzer
+git init
+echo -e "venv/\n__pycache__/\n*.pyc\n*.log\n*.csv\n*.html" > .gitignore
+
+#Commands to setup folder structure
+mkdir app scripts uploads reports
+touch requirements.txt
+touch scripts/clean_csv.sh scripts/generate_report.sh
+touch app/main.py
+
+#Commands create venv and install required libraries
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+chmod +x scripts/*.sh
+

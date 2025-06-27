@@ -1,17 +1,11 @@
 #!/bin/bash
 
-input=$1
-report="reports/report_$(date +%Y%m%d_%H%M%S).txt"
+INPUT_FILE="$1"
+REPORT_FILE="reports/report_$(date +%s).txt"
 
-if [ ! -f "$input" ]; then
-  echo "CSV file not found."
-  exit 1
-fi
+echo "Report for $INPUT_FILE" > "$REPORT_FILE"
+echo "----------------------" >> "$REPORT_FILE"
+head -n 1 "$INPUT_FILE" >> "$REPORT_FILE"
+echo "Total Rows: $(wc -l < $INPUT_FILE)" >> "$REPORT_FILE"
 
-echo "CSV Report for $input" > "$report"
-echo "=====================" >> "$report"
-echo "Column count: $(head -n 1 $input | sed 's/[^,]//g' | wc -c)" >> "$report"
-echo "Row count: $(wc -l < $input)" >> "$report"
-echo -e "\nColumn Names:" >> "$report"
-head -n 1 $input | tr ',' '\n' >> "$report"
-echo "[INFO] Report generated at $report"
+echo "Report saved to $REPORT_FILE"
