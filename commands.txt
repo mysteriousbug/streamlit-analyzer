@@ -16,3 +16,10 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 chmod +x scripts/*.sh
+
+#Jenkins Commands
+
+#Commands for Docker
+docker build -t streamlit-analyzer .
+docker run -p 8501:8501 streamlit-analyzer
+
