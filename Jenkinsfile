@@ -2,12 +2,12 @@ pipeline {
     agent any
     environment {
         REPORT_PATH = 'uploads/sample.csv'
-        EMAIL_RECIPIENT = 'your.email@example.com'
+        EMAIL_RECIPIENT = 'ananya.aithal@healthedge.com'
     }
     stages {
         stage('Clone Repo') {
             steps {
-                git 'https://github.com/your-username/streamlit-analyzer.git'
+                git 'https://github.com/mysteriousbug/streamlit-analyzer.git'
             }
         }
 

@@ -1,0 +1,4 @@
+Report for uploads/movies.csv
+----------------------
+MOVIES,YEAR,GENRE,RATING,ONE-LINE,STARS,VOTES,RunTime,Gross
+Total Rows: 108876
