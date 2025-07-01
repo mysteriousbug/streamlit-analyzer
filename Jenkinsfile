@@ -20,7 +20,10 @@ pipeline {
         stage('Run Clean + Report Inside Docker') {
             steps {
                 sh '''
-                
+		mkdir -p uploads
+		echo "name,age
+		Alice,25
+		Bob,30" > uploads/movies.csv
                 docker run --rm -v $PWD/uploads:/app/uploads -v $PWD/reports:/app/reports streamlit-analyzer bash scripts/clean_csv.sh $REPORT_PATH
                 docker run --rm -v $PWD/uploads:/app/uploads -v $PWD/reports:/app/reports streamlit-analyzer bash scripts/generate_report.sh $REPORT_PATH
                 '''
