@@ -9,14 +9,6 @@ pipeline {
 
     stages {
 
-        /* 1️⃣ Clean workspace to avoid permission issues or leftover artifacts */
-        stage('Clean Workspace') {
-            steps {
-                echo 'Cleaning workspace...'
-                deleteDir()
-            }
-        }
-
         /* 2️⃣ Clone source repo with credentials */
         stage('Clone Repo') {
             steps {
