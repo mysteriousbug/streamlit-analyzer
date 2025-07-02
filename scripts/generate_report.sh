@@ -9,4 +9,3 @@ head -n 1 "$INPUT_FILE" >> "$REPORT_FILE"
 echo "Total Rows: $(wc -l < $INPUT_FILE)" >> "$REPORT_FILE"
 
 echo "Report saved to $REPORT_FILE"
-#xxx
