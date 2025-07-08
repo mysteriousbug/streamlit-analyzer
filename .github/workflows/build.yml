@@ -1,5 +1,5 @@
 name: Build
-working-directory: ./streamlit-analyzer  # adjust if needed
+#working-directory: ./streamlit-analyzer  # adjust if needed
 
 on:
   push:
