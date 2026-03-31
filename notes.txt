@@ -1,66 +1,165 @@
-prompt - based on the AI/ML training document you gave, we selected some training and presented it to our manager, who then gave some feedback. the content we presented is pasted below:
-1. Entry Level AI training ( Mandatory for All)
-To Complete the Below trainings to kickstart your AI security Journey:
-LLMRisks Archive - OWASP Gen AI Security Project -    OWASP Top 10 for LLM Applications 2025
-MITRE ATLAS™-  living knowledge base of adversary tactics and techniques based on real-world attack observations
-https://www.rand.org/pubs/tools/TLA4174-1/ai-security/guide.html  - A guide for understanding and prioritizing the risks inherent to AI models and implementing practical solutions to decrease risk.
-Playbook – AIRC - NIST AI Playbook 
-saif.google – Google SAIF - SAIF is Google’s Secure AI Framework, which offers guidance for building and deploying AI responsibly.
-Understanding our Bank’s AI Factory: 
-Databricks overview: https://www.databricks.com/resources/learn/training/databricks-fundamentals
-Ebook for Databricks AI security Framework
-
-2. Hands on Labs based AI training/certification
-Managed Platform
-Platform: Practical DevSecOps MITRE ATLAS + OWASP hands-on course 
-Link: https://www.practical-devsecops.com/mitre-atlas-framework-guide-securing-ai-systems/ 
-Labs included: 
-Prompt injection techniques (direct & indirect) 
-Model extraction attacks 
-Training data poisoning detection 
-RAG system security testing 
-Agent autonomy boundary testing 
-Rate limiting & resource monitoring 
-Certification: Certified AI Security Professional from Practical DevSecOps and cost is 1099 USD
-Link: Certified AI Security Professional - AI Security Certification - Practical DevSecOps
-Topics covered:
-Introduction to AI Security
-Understanding and Attacking Large Language Models
-LLM Top 10 Vulnerabilities
-AI Attacks and Defenses Using DevOps
-Threat Modeling AI Systems
-Supply Chain Attacks in AI
-Emerging Threats, Governance, and Compliance in AI
-Practical DevSecOps Certification Process
-60 days of Browser-based Lab Access
-
-3. Other certifications/trainings to consider ( Self interest)
-Option 1: ISACA Advanced in AI Audit™ (AAIA) 
-Best For: Team members with CISA or equivalent Duration: 40-50 hours study + exam Cost: USD 449-599 (exam) + training (~USD 400-800 online course) Focus: Governance, risk, compliance; audit-centric Domains: 
-AI Governance & Risk (Domain 1) 
-AI Operations (Domain 2) 
-AI Controls & Assurance (Domain 3) 
-Timeline: Start Week 4, exam by Week 12 Resource: ISACA AAIA exam prep course + practice questions 
-Option 2: Certified AI Auditor (CAA) by NLL.ai 
-Best For: Broader audit audience (no prerequisites) Duration: 2 days instructor-led + 20 hours self-study Cost: USD 1,200-1,500 (2-day workshop) + exam Focus: AI algorithm fairness, bias detection, ethical AI auditing Modules: 
-Algorithms & AI fundamentals 
-Algorithmic risk & impact assessments 
-AI governance & regulations 
-Bias, accuracy & statistical testing 
-Capstone project 
-Option 4: Modern Security AI Security Certification 
-Best For: Hands-on security focus (not pure audit) Duration: Self-paced, ~40-50 hours Cost: USD 800-1,200 Focus: LLM attack/defense, threat modelling, AI security architecture Labs: 15+ hands-on exercises + 4 capstone projects 
-
-feedback from manager- For entry level:
--	Some could be too lengthy. Maybe making a few optional is better like NIST AI Playbook or the Data Brick ebook unless you think is needed.
--	I want everyone to attest they completed this section. Additional or optional items could be for future reading.
-
-Hand on Labs:
--	Looks like a very decent one. Is it self-paced and online, or a course?
-
-Certifications:
-Option 1 is just fluffy high level stuff from ISACA. Let’s drop.
-Option 2: Looks like it is not cyber/security specific? 
-Option 4: Looks like a solid one and very similar to “Certified AI Security Professional from Practical DevSecOps” – Let’s keep.
-
-task for you - prepare fresh content that i can readily paste in my slides to present it again to my manager. also prepare an excel-tracker that can track milestones etc (as mentioned in the feedback). i will share the excel with all members of the team. there are 16 members in the team (ICS)
+vendor
+AWS
+Abbyy
+Acronis
+Activestate
+Adobe Systems
+Alvaria, Inc.
+Aquafold
+Arcserve
+Ariya Hidayat
+Ashish Kulkarni
+Aspect Software
+Attractel
+Autoit Team
+Automationedge Inc.
+Avaya
+Axway
+Azul Systems, Inc.
+Benito Van Der Zander
+Beyondtrust Software
+Bitnami
+Bmc Software
+Broadcom
+Capitalware
+Chocolatey
+Chronosphere, Inc.
+Cisco
+Citrix Systems
+Cloudera
+Cohesity, Inc.
+Collabnet
+Corel Corporation
+Couchbase
+Crystal Point
+Daiyuu Nobori
+Dbeaver
+Dbeaver Corp
+Dbvis Software
+Delinea Inc.
+Dell
+Docker
+Docuware Gmbh
+Don Ho
+Eg Innovations, Inc.
+Elastic N.V.
+Elasticsearch
+Emulex
+Ericsson
+Evoko Unlimited Ab
+Exterro, Inc.
+F5
+Firebird
+Fis
+Fortanix Inc.
+Fortinet
+Frogmore Computer Services
+Fujifilm
+Fullstory, Inc.
+Genesys
+Gitlab
+Glavsoft
+Google
+Grafana Labs
+Gs Topco Gp, Llc
+Hcl Technologies Limited
+Helios
+Hitachi
+Honeywell
+Hortonworks, Inc.
+Ibm
+Identiv, Inc.
+Idera, Inc.
+Igor Pavlov
+Imecom
+Influxdata, Inc.
+Informatica
+Infragistics
+Inovalon Holdings, Inc.
+Integrated Research
+Intel
+Intersystems
+Irfan Skiljan
+Itrs
+Jenkins
+Jetbrains
+Jfrog
+Kai Kramer
+Kong Inc.
+Lenel
+Lexmark
+Linqpad Pty. Ltd.
+Mariadb Foundation
+Marlin Management Company, Llc
+Martin Prikryl
+Mastercard
+Minio, Inc.
+Mongodb
+Musarubra Us, Llc
+Myq, Spol. S R.O.
+Netapp
+Nice Actimize
+Nlyte Software
+Node.Js Foundation
+Notebase Techologies Llp
+Nuance Communications
+Open Text
+Openssl Project
+Oracle
+Pdflib
+Perforce Software
+Pgadmin
+Postgresql
+Postman, Inc.
+Precisely Holdings, Llc
+Progress Software
+Pulumi Corporation
+Python Software Foundation
+Qliktech
+Qualys, Inc.
+Realvnc
+Red Hat
+Redis Labs, Inc.
+Rocket Software
+Rundeck, Inc.
+Sage
+Salesforce.Com
+Samba Team
+Sap
+Sapien Technologies
+Sas Institute Inc.
+Scooter Software
+Semperis Ltd.
+Sentinelone, Inc.
+Shining Light Productions
+Software Ag
+Software Freedom Conservancy
+Solarflare Communications
+Ssh Communications Security
+Strawberry Perl
+Sungdong Kim
+Tanium
+Teradata
+Tesseract Ocr
+Thales E-Security
+The Apache Software Foundation
+The Containerd Authors
+The Document Foundation
+The Eclipse Foundation
+The Elixir Team
+The R Foundation
+The Winmerge Development Team
+Thingamahoochie Software
+Tim Kosse
+Trellix
+Unknown
+Verint Systems
+Veritas Technologies Llc
+Visualsvn
+Vmware, Inc.
+Wireshark Foundation
+Y Soft Corporation, A.S.
+Yarn
+Zenju
+Zeroc
+Zoom Communications, Inc.
