@@ -1,3 +1,5 @@
+i will give you a list of vendors like Microsoft, Tanium, etc. can you go to their official product website, do web scraping and fetch a list of products and their end of support dates? give me an excel sheet output. i will use that sheet to compare with my internal EOS dates.
+
 vendor
 AWS
 Abbyy
