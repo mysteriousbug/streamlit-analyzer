@@ -1,14 +1,17 @@
-i have these columns in my excel file:
-1. Business Criticality - {1-Negligible, 2-Low, 3-Medium, 4-High, 5-Catastrophic}
-2. Security BIA - {1,2,3,4,5}
-3. IBS - {Yes, No}
-4. Obsolete Hardware up until 2025 - {any integer between 0 and 3000}
-5. Obsolete OS up until 2025 - {any integer between 0 and 2000}
-6. Obsolete Software up until 2025 - {any integer between 0 and 1000}
-7. Security Vulnerability Exception Count - {any integer between 0 and 50000}
-8. Network Access Controls (NAC) Impact - {Yes, No}
-9. Malware Controls Count- Unsupported - {any integer between 0 and 200}
+internal - 
+Product Name	Product EOS Date Status	Software Publisher	Software Version	Software Full Version
+Amazon | Amazon Corretto | 8.0 | 1.8.0.352 |	31/12/2030	Amazon	8.0	1.8.0.352
+Amazon | Amazon Corretto | 8.0 | 1.8.0.352 |	31/12/2030	Amazon	8.0	1.8.0.352
+Amazon | Amazon Corretto | 8.0 | 1.8.0.352 |	31/12/2030	Amazon	8.0	1.8.0.352
 
-i need to identify applications that have same/similar values in the above parameters, but the 10th column 
-10. Current Residual Risk Rating (GRAM) - O&T - {1A,1B,1C,1D,2A,2B....}
-value is different. Output a python script for me.
+
+external - 
+Vendor	Product	Version/Release	End of Life / End of Support
+AWS	Amazon Linux	2	2025-06-30
+AWS	Amazon Linux	2023	2028-03-15
+AWS	Amazon EKS	1.27	2025-07-24
+AWS	Amazon EKS	1.28	2025-11-26
+AWS	Amazon EKS	1.29	2026-03-23
+AWS	Amazon EKS	1.30	2026-07-23
+AWS	Amazon Aurora PostgreSQL	13	2026-01-31
+
