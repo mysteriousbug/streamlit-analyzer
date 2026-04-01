@@ -1,17 +1,1 @@
-internal - 
-Product Name	Product EOS Date Status	Software Publisher	Software Version	Software Full Version
-Amazon | Amazon Corretto | 8.0 | 1.8.0.352 |	31/12/2030	Amazon	8.0	1.8.0.352
-Amazon | Amazon Corretto | 8.0 | 1.8.0.352 |	31/12/2030	Amazon	8.0	1.8.0.352
-Amazon | Amazon Corretto | 8.0 | 1.8.0.352 |	31/12/2030	Amazon	8.0	1.8.0.352
-
-
-external - 
-Vendor	Product	Version/Release	End of Life / End of Support
-AWS	Amazon Linux	2	2025-06-30
-AWS	Amazon Linux	2023	2028-03-15
-AWS	Amazon EKS	1.27	2025-07-24
-AWS	Amazon EKS	1.28	2025-11-26
-AWS	Amazon EKS	1.29	2026-03-23
-AWS	Amazon EKS	1.30	2026-07-23
-AWS	Amazon Aurora PostgreSQL	13	2026-01-31
-
+@@@
