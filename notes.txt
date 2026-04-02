@@ -1,1 +1,26 @@
-coming to the python screen lock on desktop. i want to make some modifications. i want to send a dummy file via email (preferable one with many pages), and once the recipient of the email downloads the file, i want the screenlock script to run in the background. the user should not have to do anything. after downloading the attachments and 10 seconds are up, the screen should automatically lock. it should only open with the password "1234", nothing else is allowed. no file encryption and all - just this.
+1. EID Report - This report will capture all the session logins using CTASK No. / Incident task No across all
+1. Risk Title: EID Withdrawals from PIM: Risk of fraud and data theft due to unauthorized access caused by inappropriate levels of access granted through high privilege emergency ids.
+ 
+ 
+2. Risk Descriptions: High number of EID withdrawals has been experienced - H1 ‘2011: 26,000+ changes using EIDs and 157,000+ incidents using EIDs. There is no logging and review of the usage of the EIDs today as Technology lacks the capacity to review each and every withdrawal and usage of these privileged ids.  The reason for the high number of withdrawals of EIDs today is due to the fact that a number of support staff do not have the basic access to allow them to have read access to do investigations nor do they have the access for basic operations.  Therefore, majority of the EIDs withdrawn are for basic BAU work which do not require such high level privileges to do the work.  This leads to the second issue with inappropriate access given for day to day BAU work by IT Support. 
+Both inadequacies may result in unauthorized changes taking place undetected which in turn can cause system failures that lead to financial losses, business operational, reputation and regulatory impacts.  There is also a risk of fraud taking place as the EIDs have the ability to patch production data as well as program objects.
+schema:
+SERVER_NAME	DBInstanceName	ACCOUNT_NAME	PLATFORM	REQUESTER_PIN	FIRSTNAME	LASTNAME	RETRIEVE DATE-UKT	REQUEST_ID	ISA_RELEASE_ID	RELEASED_MODE	REASON	REMEDY_TYPE	TICKET NUMBER	Relationship INC/TAS	ASSIGNMENT_GROUP	SHORT DESCRIPTION	EXPIRES_DATE	PRIORITY	Repository	RequestedAssetName
+xxx		mongo	Linux	aaa			11/29/2025 14:39			Password		SNOW-OV CI Validation			DATABASE SVCS-MONGO TSO CHG	2025 H2 GDCE DR Test - Child CR for Infra - Database (HK DB2 and MONGO)(50702)- Master ttt	11/30/2025 2:39	4 - Low	OneVault	xxx
+
+2. Active_Use_Cases.xlsx
+this is the extract from splunk, which includes a report of all incidents
+Title	action.correlationsearch.label	action.correlationsearch.annotations	action.notable.param.rule_description	action.notable.param.severity	action.notable.param.security_domain	description	search	Stage (Pre Prod/ Prod)
+Access - AWS - Root Account Activity - Rule	AWS - Root Account Activity	{"mitre_attack":["xxx"]}	Config Changes for the Application $Application$ on the following Event Name - $Sub_Event$	critical	access	AWS - Root Account Activity for the Following Identity type: Root	zzz	Production
+
+3. PID_Retrieval_Report.xlsx
+4. Consolidated_Unvaulted_Output_Jan_2026.xlsx
+List of all vaulted + unvaluted IDs in databases - refreshed every month
+Sec_Recon_ID	Primary_Recon_ID	CI_Type	CI_Sub_Type	CI_Name	Virtual_CI	CI_IP	Instance_Name	Database_Name	User_Name	Status	OV Entry	Managed Acc Id	HCV Entry	Catalyst	Risk Number
+xxx	xxx	MSSQL	SQL_LOGIN	xx	yy		tt	y	tgghy	PID Exception - Low Privilege			#N/A	Non-Catalyst	
+xcc	xxx	MSSQL	SQL_LOGIN	xx	yy		tt	y	ddd	Vaulted in Hashicorp Vault			#N/A	Non-Catalyst	
+uuu	eee	Oracle		xx	yy		sdf	fvkjd	red	Vaulted in OneVault			#N/A	Catalyst	
+
+5. OV_Logs.xlsx
+System	Account	Directory	Requestor	Reason	Task_NO	CHG/INC_NO	Duration	Protocol	Application	Resolution	File Size	Session Start	Session End	Reviewed	Reviewed Date	Request Date
+ttt	eeee	--	sfgsdf	dfsdfs	sdffdsfd	sdff	0:40:59	RDP	--	Maximized	2.77 MB	Feb 21, 2026, 1:45 AM	Feb 21, 2026, 2:26 AM		--	Feb 21, 2026, 1:45 AM
