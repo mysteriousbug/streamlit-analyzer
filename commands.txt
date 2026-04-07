@@ -1,25 +1,8 @@
-#Commands to setup working directory
-mkdir streamlit-analyzer
-cd streamlit-analyzer
-git init
-echo -e "venv/\n__pycache__/\n*.pyc\n*.log\n*.csv\n*.html" > .gitignore
+for now you are using streamlit cloud for storage right?
+can we use any of these for the backend azure (sql, postgre). once i reload the app, i dont want my old data to be lost.
 
-#Commands to setup folder structure
-mkdir app scripts uploads reports
-touch requirements.txt
-touch scripts/clean_csv.sh scripts/generate_report.sh
-touch app/main.py
+also, along with the walkthrough notes, there must be an option for me to upload other related documents like - process documents, access matrices, technical implementation procedure documents, risk rating ets (could be anything)
+this should be used to make the rcm; i hope you're clear with the rcm structure. i have pasted the column headers for your reference.
+Process Ref.	Process Title	Process Description	Risk Ref	Risk Title	Risk Description	Control Ref.	Control Title	Control Description	Related Key Questions	CDE Required	COE Required	CDE or COE DA Required	Control Design Effectiveness (CDE) – Test Procedures	Control Operating Effectiveness (COE) – Test Procedures	Data Analytics (DA) Test Procedure	Audit Team Member
 
-#Commands create venv and install required libraries
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-
-chmod +x scripts/*.sh
-
-#Jenkins Commands
-
-#Commands for Docker
-docker build -t streamlit-analyzer .
-docker run -p 8501:8501 streamlit-analyzer
-
+after the walkthrough notes + other supporting documents are uploaded for that particular control, AI should suggest possible CDE, COE, DA etc as mentioned in the rcm. the auditor has the option to override the suggested CDE, COE -> after which he uploads the CDE section -> then the same for COE section and then DA section
