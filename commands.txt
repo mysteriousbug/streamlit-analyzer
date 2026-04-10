@@ -1,8 +1,24 @@
-for now you are using streamlit cloud for storage right?
-can we use any of these for the backend azure (sql, postgre). once i reload the app, i dont want my old data to be lost.
-
-also, along with the walkthrough notes, there must be an option for me to upload other related documents like - process documents, access matrices, technical implementation procedure documents, risk rating ets (could be anything)
-this should be used to make the rcm; i hope you're clear with the rcm structure. i have pasted the column headers for your reference.
-Process Ref.	Process Title	Process Description	Risk Ref	Risk Title	Risk Description	Control Ref.	Control Title	Control Description	Related Key Questions	CDE Required	COE Required	CDE or COE DA Required	Control Design Effectiveness (CDE) – Test Procedures	Control Operating Effectiveness (COE) – Test Procedures	Data Analytics (DA) Test Procedure	Audit Team Member
-
-after the walkthrough notes + other supporting documents are uploaded for that particular control, AI should suggest possible CDE, COE, DA etc as mentioned in the rcm. the auditor has the option to override the suggested CDE, COE -> after which he uploads the CDE section -> then the same for COE section and then DA section
+Component Name
+Cloud Deployment: Azure cloud infrastructure in West Europe, Singapore and UK South regions
+LLM Endpoints: Programmatic access to production LLM endpoints for consumer application consumption
+List of Models available in the AI Factory as part of R1 Options:
+model name | Open Source / Commercial
+- meta-llama 3.3-70b-instruct | DBx Model Serving - Commercial
+- claude-sonnet-3.7 | DBx Model Serving - Commercial
+- databricks-bge-large-en | DBx Model Serving - Commercial
+- OpenAI proprietary models | GPT4o - Commercial
+AI Guardrails: AI guardrails will be implemented through integration with Microsoft AI Content Safety and Presidio for robust content moderation and sensitive data protection
+Pipeline Support: Lifecycle management for creating isolated LLM endpoints
+Integration: Compatible with SC-IDP
+Databricks Workspace: Establishment of a collaborative data workspaces. No structured data will be ingested on the platform as part of this release.
+Unity Catalog: Unity Catalog will be configured for workspaces, data access control is always in place. No structured data ingestion will occur in this release, as EDMP is not yet available. Workspace users will have streamlined access limited to their own embedding data stored within their individual workspaces.
+RAG (FileNet): Integration of Retrieval-Augmented Generation (RAG) pipelines with FileNet to source documents /files for processing and retrieval.
+Quarantine Zone: The Quarantine Zone is a secure, isolated environment designed for handling open-source models downloaded from public repositories such as Hugging Face. Its primary purpose is to ensure that models are safe and compliant before being integrated into AI Factory.
+AI / ML / LLMOps  applies only to code deployment. There is no model training or deployment involved in this release.
+MLFlow:  MLFlow component will be used as a standard model versioning under registration service in Data Bricks
+MLOps Pipeline :  Model training and deployment for traditional machine learning.
+Sandbox Environment: Provide a secure sandbox for data scientists to work on masked production data, ensuring strict isolation from production systems.
+Elastic Integration: Enable RAG use cases where the knowledge base resides outside AI Factory.
+Landing Zone Design: AI Factory Landing zone create a space for unstructured data classification, pii detection and tokenization if needed.
+SharePoint Integration: Connect AI Factory workflows with SharePoint for document and knowledge management.
+EDMP Integration: Integrate Enterprise Data Management Platform
