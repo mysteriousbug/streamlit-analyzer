@@ -1,24 +1,6 @@
-Component Name
-Cloud Deployment: Azure cloud infrastructure in West Europe, Singapore and UK South regions
-LLM Endpoints: Programmatic access to production LLM endpoints for consumer application consumption
-List of Models available in the AI Factory as part of R1 Options:
-model name | Open Source / Commercial
-- meta-llama 3.3-70b-instruct | DBx Model Serving - Commercial
-- claude-sonnet-3.7 | DBx Model Serving - Commercial
-- databricks-bge-large-en | DBx Model Serving - Commercial
-- OpenAI proprietary models | GPT4o - Commercial
-AI Guardrails: AI guardrails will be implemented through integration with Microsoft AI Content Safety and Presidio for robust content moderation and sensitive data protection
-Pipeline Support: Lifecycle management for creating isolated LLM endpoints
-Integration: Compatible with SC-IDP
-Databricks Workspace: Establishment of a collaborative data workspaces. No structured data will be ingested on the platform as part of this release.
-Unity Catalog: Unity Catalog will be configured for workspaces, data access control is always in place. No structured data ingestion will occur in this release, as EDMP is not yet available. Workspace users will have streamlined access limited to their own embedding data stored within their individual workspaces.
-RAG (FileNet): Integration of Retrieval-Augmented Generation (RAG) pipelines with FileNet to source documents /files for processing and retrieval.
-Quarantine Zone: The Quarantine Zone is a secure, isolated environment designed for handling open-source models downloaded from public repositories such as Hugging Face. Its primary purpose is to ensure that models are safe and compliant before being integrated into AI Factory.
-AI / ML / LLMOps  applies only to code deployment. There is no model training or deployment involved in this release.
-MLFlow:  MLFlow component will be used as a standard model versioning under registration service in Data Bricks
-MLOps Pipeline :  Model training and deployment for traditional machine learning.
-Sandbox Environment: Provide a secure sandbox for data scientists to work on masked production data, ensuring strict isolation from production systems.
-Elastic Integration: Enable RAG use cases where the knowledge base resides outside AI Factory.
-Landing Zone Design: AI Factory Landing zone create a space for unstructured data classification, pii detection and tokenization if needed.
-SharePoint Integration: Connect AI Factory workflows with SharePoint for document and knowledge management.
-EDMP Integration: Integrate Enterprise Data Management Platform
+Potential Test Steps :
+1.	Obtain the user listings for applications and supporting infrastructure
+2.	Identify which are privileged IDs based on the Security Access Matrix
+3.	Reconcile against the lists from OneVault and HashiCorp to see if the accounts are vaulted
+
+Not sure if it is best to perform Test Step 2 first or 3?! As if they are vaulted, we don’t have to review them!
