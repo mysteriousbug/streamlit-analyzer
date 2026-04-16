@@ -1,2 +1,7 @@
-streamlit
-pandas
+pdfplumber>=0.10
+python-pptx>=0.6.21
+openpyxl>=3.1
+
+# Only needed for generate_samples.py (the sample-data generator).
+# Not required to run analyze.py itself.
+reportlab>=4.0

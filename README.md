@@ -1,132 +1,92 @@
-# Risk Rating Anomalies Detection Script
+# Risk Metrics Analyzer
 
-## Overview
-This Python script identifies applications that have **similar/identical parameter values** but **different risk ratings (GRAM)**, flagging potential inconsistencies in risk assessment.
+Pure-Python pipeline that reads monthly risk-metric documents (PPTX, PDF, XLSX) and produces a consolidated breach report.
 
-## Features
-- **Similarity scoring** across 9 parameters with configurable tolerances
-- **Smart comparison logic**: Exact matches for categorical fields, tolerance-based for numeric
-- **Configurable thresholds**: Adjust minimum similarity % and numeric tolerances
-- **Detailed output**: Shows matching parameters and risk rating differences
-- **Excel export**: Results formatted with auto-sized columns and frozen headers
+## What it does
 
-## Parameters Analyzed
-1. Business Criticality (1-5 scale, categorical)
-2. Security BIA (1-5 scale)
-3. IBS (Yes/No)
-4. Obsolete Hardware up until 2025 (0-3000)
-5. Obsolete OS up until 2025 (0-2000)
-6. Obsolete Software up until 2025 (0-1000)
-7. Security Vulnerability Exception Count (0-50000)
-8. Network Access Controls (NAC) Impact (Yes/No)
-9. Malware Controls Count - Unsupported (0-200)
+- Walks a folder of monthly risk-metric files
+- Finds tables of type `Breached KCI`, `Previous Breached KCI - monitoring`, `Previous Amber KRI - monitoring`, or `Amber KCI` within each file
+- Parses the threshold string (e.g. `Green < 3%, Amber 3% < x < 5%, Red > 5%`) into numeric bands
+- Classifies each month's value as Green / Amber / Red
+- Flags metrics that are currently Amber/Red or trending worse
+- Produces two outputs: a colour-coded Excel workbook and a summary PPTX
 
-**Risk Rating Column**: Current Residual Risk Rating (GRAM) - O&T
+## Install
 
-## Installation
 ```bash
-pip install pandas openpyxl
+pip install -r requirements.txt
 ```
+
+Python 3.10+. No AI/LLM dependencies.
+
+## Folder layout for input
+
+Organize input files so the top-level folder name under `--input` is the domain:
+
+```
+monthly_files/
+├── DLP/
+│   ├── DLP_WebAppSec_Feb2026.pptx
+│   └── DLP_Endpoint_Feb2026.pdf
+├── Governance/
+│   └── GOV_Feb2026.pdf
+└── TPSA/
+    └── TPSA_Feb2026.xlsx
+```
+
+The domain is taken from the first folder segment under the input root. The subdomain is taken from the slide title (PPTX), the page's top-line text (PDF), or the sheet name (XLSX).
 
 ## Usage
 
-### Basic Usage
 ```bash
-python risk_rating_anomalies.py applications.xlsx
-```
-Creates: `anomalies_output.xlsx` with minimum 75% similarity threshold
+# Run on real data
+python analyze.py --input /path/to/monthly_files --output ./reports
 
-### Custom Output File
-```bash
-python risk_rating_anomalies.py applications.xlsx my_anomalies.xlsx
-```
-
-### Custom Similarity Threshold
-```bash
-python risk_rating_anomalies.py applications.xlsx anomalies.xlsx 80
-```
-Sets minimum similarity to 80%
-
-## How It Works
-
-### Similarity Calculation
-- **Categorical fields** (Business Criticality, IBS, NAC Impact): Must match exactly
-- **Numeric fields**: Match if within configured tolerance
-- **Score**: (Matching parameters / Total parameters) × 100
-
-### Default Tolerances
-| Parameter | Tolerance |
-|-----------|-----------|
-| Security BIA | 0 (exact) |
-| Obsolete Hardware | ±50 |
-| Obsolete OS | ±50 |
-| Obsolete Software | ±25 |
-| Security Vulnerabilities | ±500 |
-| Malware Controls | ±10 |
-
-### Anomaly Detection
-Pairs are flagged if:
-1. Similarity score ≥ threshold (default 75%)
-2. Different risk ratings
-3. No missing values in either row
-
-## Output Format
-
-| Column | Description |
-|--------|-------------|
-| Application 1 | Name/ID of first app |
-| Application 2 | Name/ID of second app |
-| Similarity Score (%) | How similar the parameters are |
-| Matching Parameters | Which parameters matched |
-| Risk Rating 1 | GRAM rating for first app |
-| Risk Rating 2 | GRAM rating for second app |
-| Row 1 | Excel row number for first app |
-| Row 2 | Excel row number for second app |
-
-Results are sorted by similarity score (highest first).
-
-## Customization
-
-Edit the `find_anomalies()` function to adjust:
-
-**Tolerances** (lines 74-82):
-```python
-tolerances = {
-    'Security BIA': 0,
-    'Obsolete Hardware up until 2025': 50,  # Change this
-    # ...
-}
+# Test with sample data first
+python generate_samples.py
+python analyze.py --input sample_data --output output
 ```
 
-**Minimum Similarity** (line 108):
-```python
-find_anomalies(df, min_similarity=75.0)  # Change threshold
+Add `-v` for debug logging.
+
+## Outputs
+
+**`risk_metrics_report.xlsx`**
+- `Summary` sheet — headline counts, breakdown by subdomain, top breach reasons
+- `Flagged Metrics` sheet — one row per Amber/Red/worsening metric, colour-coded by status
+- `Raw Extracted` sheet — every metric extracted, with each month's cell coloured by its status. Use this sheet to verify extraction against source files.
+
+**`risk_metrics_summary.pptx`**
+- Headline slide with breach counts
+- One slide for Red breaches (if any)
+- One slide for Amber breaches (if any)
+- Top root-cause themes slide
+
+## How it handles the four table types
+
+Tables are identified by matching the heading text immediately above them against the four known labels. The matching is case- and whitespace-insensitive, and "Previous Breached KCI" is checked before "Breached KCI" so it doesn't match prematurely. In XLSX, where tables don't have an implicit "above" heading, the scanner looks for any cell matching a table-type label and takes the block of rows below it.
+
+## Extending
+
+**New threshold formats.** Edit `parse_threshold()` in `models.py`. The current implementation finds `green <op> <num>` and `red <op> <num>` anywhere in the string; direction (higher-is-worse vs lower-is-worse) is inferred from the operators. If your team uses "R" / "A" / "G" instead of full names, or uses numeric bands without labels, add patterns there.
+
+**New column aliases.** Edit `_HEADER_ALIASES` in `normalizer.py` if your actual files use different column names (e.g. "KCI Identifier" instead of "ID").
+
+**New month label formats.** Edit `parse_month_label()` in `models.py`. It currently handles `December'25`, `Jan-26`, `Feb 2026`, etc.
+
+**PDF extraction quirks.** `pdfplumber` occasionally splits wide cells' text across adjacent cells or merges cell contents. When extraction is wrong, first look at the `Raw Extracted` sheet to see what came through. Tune `find_tables()` settings in `extractors/pdf_extractor.py` — pdfplumber takes keyword args like `vertical_strategy`, `horizontal_strategy`, `snap_tolerance` that often fix table-detection issues.
+
+## Architecture
+
+```
+analyze.py                  CLI, file walking, dispatch
+├── extractors/
+│   ├── pptx_extractor.py   python-pptx: slide → tables
+│   ├── pdf_extractor.py    pdfplumber: page → tables
+│   └── xlsx_extractor.py   openpyxl: sheet → tables
+├── normalizer.py           Raw table → MetricRow (header mapping, row parsing)
+├── models.py               Dataclasses, threshold parser, month parser
+└── report.py               MetricRow list → Excel + PPTX
 ```
 
-## Example Scenario
-
-**Input Data:**
-| App | Business Crit | Security BIA | Hardware | GRAM |
-|-----|---------------|--------------|----------|------|
-| App A | 4-High | 4 | 150 | 1A |
-| App B | 4-High | 4 | 155 | 2B |
-
-**Output:**
-- Similarity: 75% (3 matching / 4 key params)
-- **Flagged**: Both apps are nearly identical but have different risk ratings (1A vs 2B)
-- Action: Review risk assessment methodology
-
-## Error Handling
-- Missing columns: Script exits with error listing required columns
-- Missing data: Rows with NaN values are skipped in comparison
-- File not found: Clear error message with path
-
-## Performance
-- Compares all pairs: O(n²) complexity
-- 1000 applications: ~500K comparisons (typically <5 seconds)
-- 10000 applications: ~50M comparisons (~2-3 minutes)
-
-For very large datasets (>50K rows), consider:
-- Filtering to smaller subsets by business unit
-- Increasing min_similarity threshold
-- Pre-filtering by risk rating band
+The format-specific extractors are responsible only for **finding tables and identifying their type**. All downstream logic (header detection, threshold parsing, classification, trend analysis, reporting) is shared. Adding a new input format (e.g. DOCX) means writing one new extractor and nothing else.
