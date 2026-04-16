@@ -1,6 +1,21 @@
-Potential Test Steps :
-1.	Obtain the user listings for applications and supporting infrastructure
-2.	Identify which are privileged IDs based on the Security Access Matrix
-3.	Reconcile against the lists from OneVault and HashiCorp to see if the accounts are vaulted
+this is the problem i want to solve: each person in the team (5 people) have different domains they handle (for example data leakage protection, governance and reporting, etc). each domain may have multiple subdomains. every month there is a scan that is run, and a set of documents (could be ppt, pdf, excel, etc) sent out to these team members.
+inside the slide/pdf for each subdomain there will be tables like this:
+1. Breached KCI
+2. Previous Breached KCI - monitoring
+3. Previous Amber KRI - monitoring
+4. Amber KCI
 
-Not sure if it is best to perform Test Step 2 first or 3?! As if they are vaulted, we don’t have to review them!
+it is not necessary to have all tables - there can be 1 or even 4. each table has the following columns:
+
+ID - alphanumeric string
+Metric Name - ex: % of scoped applications without Application Security Monitoring
+Threshold - ex: Green < 3%, Amber 3% < x < 5%, Red > 5%
+Freq - ex:monthly
+December'25 - xx%
+January’26 - yy%
+February’26 (dates keep changing, based on most recent scan month) - zz%
+Reason for breach - text
+Progress - what is being done to remediate the risk already
+M7 / ERR Ref - alphanumeric string
+
+now i have access to our company's Microsoft copilot - and we are not supposed to use any other AI tool for this task. this copilot has access to each persons personal one-drive, where these monthly files will be stored. so, i wanted a script/prompt to summarize the metrics and see if any months metric exceeded the threshold. and a summary slide/simple report should be generated - as to how many metrics are breached, and why they are breached.
