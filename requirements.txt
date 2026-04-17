@@ -1,7 +1,16 @@
-pdfplumber>=0.10
-python-pptx>=0.6.21
-openpyxl>=3.1
-
-# Only needed for generate_samples.py (the sample-data generator).
-# Not required to run analyze.py itself.
-reportlab>=4.0
+Application onboarded for central authentication is tracked manually ​	Automate the reconciliation of application in CMDB with list of application onboarded into Entra​	Improved efficiency and assurance of adequate coverage​	SSO (IAM)​	Medium​	Medium​	CMDB​	Stakeholders support for data from Entra​
+						Entra​	
+Applications onboarded for MFA are currently tracked through a manual listing, and there is no straightforward or automated mechanism to independently confirm whether MFA is actually enforced at the application level within Entra​	Automate the reconciliation of application in CMDB with list of application onboarded into Entra for MFA​	Improved efficiency and assurance of adequate coverage​	MFA (IAM)​	Medium​	Medium​	CMDB​	Stakeholders support for data from Entra​
+						Entra​	
+Anomalous activity around PID accounts​	Automate to analyse PID session duration and identify anomalous activity such as multiple PID withdrawal > 5 per day or staff accessing PID during block leave.​	Improved efficiency and assurance​	PID (IAM)​	Medium​	Medium​	OneVault​	Stakeholders support for data from Entra​
+						HR data​	
+neal's use cases							
+ICS Self-identified Security Non-Compliances (SNCs) are raised in Azure Dev Ops (ADO) if one or more of a control requirement in an ICS Standard cannot be met. However, due to the volume (>9,000) of non-compliances, which vary in depth and detail, the SNCs may not be properly assessed for the overall Risk to the Bank.​	Review the SNCs raised in ADO to identify the concentration across ICS standards​	Assurance that a concentration of non-compliances do not present a risk to the Bank​	SNCs​	Medium​	High​	SNCs on ADO pipeline (recently migrated from ServiceNow)​	Data quality and completeness from ADO ​
+​							
+​							
+pavi's use cases							
+Today, we know that CTPS does not have a management monitoring and measurement in place to check, if CTPS is actively engaging with High/critical vendors when they see a potential gap/ dip in vendor’s control infrastructure. This gap could ideally translate to increased reaction time, while assessing incident impact to the group from vendor breaches.​	1. Consume, 3POT list of High/Critical vendors & also get the list of rules configured in Panorays for these vendors – Use DA to check if Panorays coverage is comprehensive at any point in time & also, indicate whenever there is no match for any high/critical vendors.​	Provides real time visibility to management on third party security monitoring and remediation.​	CTPS​	Medium​	High​	1.3POT : List of active High/risk vendors ​	1. Support from Stakeholders​
+	2. Create a dashboard to show when there a dip/gap in the Panorays data for High/critical vendors, use DA to check if there is a corresponding investigation initiated by CTPS with vendors to enable targetted review of vendors and also understand 5W ,1H to assess residual risk for the process.​					2.Panorays : List of Vendors who are monitored for alerts for possible changes in the control infrastructure information. ​	
+						3.CTPS : Internal tracker/ ticketing system/ any repository, to check if there is a potential investigation initiated with any of the High/critical vendors​	
+						​	
+						The above 3 sources should help us build a dashboard to get this view of how CTPS operates with Panorays insights for High/critical vendors. ​	
