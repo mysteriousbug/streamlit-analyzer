@@ -1,26 +1,315 @@
-indraneel's use cases							
-Problem Statement​	Proposed Solution​	Benefit​	Process​	Effort​	Impact​	Data Repository​	Dependency​
-Limited visibility of endpoint protection coverage for cloud assets (containers and compute), making it difficult to provide assurance that SentinelOne is deployed comprehensively across the estate.​	Reconcile SentinelOne agent deployment with inventories of cloud and container assets to identify coverage gaps and unprotected assets.​	Assurance of coverage​	EESP​	Medium​	High​	SentinelOne console; CMDB (on‑prem containers, cloud VMs); Wiz (cloud containers)​	Coordination with SentinelOne, Wiz, and CMDB owners​
-Vulnerability ingestion into Service Bench is tested manually in every audit, resulting in repetitive effort and limited ability to provide continuous assurance.​	Automate reconciliation of vulnerabilities identified by multiple scanners with Service Bench records to verify completeness and accuracy of ingestion.​	Reduced repetitive audit effort; continuous monitoring​	SVLM​	Medium​	High​	Vulnerability scanner outputs (Qualys, Aqua, Wiz); Service Bench​	Support from scanner and Service Bench stakeholders​
-Vulnerability data extraction for audits is manual and stakeholder‑dependent, leading to delays and inconsistent access across audit teams.​	Develop a self‑service dashboard sourcing Service Bench data with filters tailored for audit needs.​	Improved audit efficiency; reduced stakeholder dependency​	SVLM​	Low​	High​	Service Bench​	Stakeholder support for dashboard enablement​
-ashish's use cases							
-USB / removable media exceptions and privileged access are managed independently, resulting in limited visibility of users who simultaneously hold both. This restricts the ability to identify high‑risk identities with elevated data exfiltration potential.​	Correlate active USB exception records with privileged group and role membership to identify users belonging to both populations and prioritise them for audit review.​	Improved risk visibility and targeted audit focus​	Endpoint Security / Identity Governance​	Medium​	High​	USB exception register; privileged group and role membership data (AD / IAM / PAM)​	Ownership of USB exception data; curated list of in‑scope privileged groups​
-USB exceptions are expected to be time‑bound, justified, and periodically reviewed, but weak exception hygiene (expired, open‑ended, or repeatedly approved exceptions) can persist without detection.​	Analyse USB exception records for hygiene issues and overlay privilege data to prioritise remediation of high‑risk exceptions.​	Improved exception governance and hygiene​	Endpoint Security / Identity Governance​	Medium​	High​	USB exception metadata (dates, justification, approver); privileged access listings​	Data quality and completeness of exception records; IAM support​
-USB exception reviews are typically performed manually during audits, resulting in repetitive effort and limited risk‑based scoping across audits.​	Create a repeatable analytics dataset refreshed periodically to support continuous monitoring and risk‑based audit planning.​	Reduced audit effort; enable continuous monitoring​	Audit Analytics / Continuous Monitoring​	Low​	High​	USB exception data; privileged access data; optional HR enrichment​	Agreement on refresh frequency and consumption model​
-							
-Application onboarded for central authentication is tracked manually ​	Automate the reconciliation of application in CMDB with list of application onboarded into Entra​	Improved efficiency and assurance of adequate coverage​	SSO (IAM)​	Medium​	Medium​	CMDB​	Stakeholders support for data from Entra​
-						Entra​	
-Applications onboarded for MFA are currently tracked through a manual listing, and there is no straightforward or automated mechanism to independently confirm whether MFA is actually enforced at the application level within Entra​	Automate the reconciliation of application in CMDB with list of application onboarded into Entra for MFA​	Improved efficiency and assurance of adequate coverage​	MFA (IAM)​	Medium​	Medium​	CMDB​	Stakeholders support for data from Entra​
-						Entra​	
-Anomalous activity around PID accounts​	Automate to analyse PID session duration and identify anomalous activity such as multiple PID withdrawal > 5 per day or staff accessing PID during block leave.​	Improved efficiency and assurance​	PID (IAM)​	Medium​	Medium​	OneVault​	Stakeholders support for data from Entra​
-						HR data​	
-neal's use cases							
-ICS Self-identified Security Non-Compliances (SNCs) are raised in Azure Dev Ops (ADO) if one or more of a control requirement in an ICS Standard cannot be met. However, due to the volume (>9,000) of non-compliances, which vary in depth and detail, the SNCs may not be properly assessed for the overall Risk to the Bank.​	Review the SNCs raised in ADO to identify the concentration across ICS standards​	Assurance that a concentration of non-compliances do not present a risk to the Bank​	SNCs​	Medium​	High​	SNCs on ADO pipeline (recently migrated from ServiceNow)​	Data quality and completeness from ADO ​
-​							
-​							
-pavi's use cases							
-Today, we know that CTPS does not have a management monitoring and measurement in place to check, if CTPS is actively engaging with High/critical vendors when they see a potential gap/ dip in vendor’s control infrastructure. This gap could ideally translate to increased reaction time, while assessing incident impact to the group from vendor breaches.​	1. Consume, 3POT list of High/Critical vendors & also get the list of rules configured in Panorays for these vendors – Use DA to check if Panorays coverage is comprehensive at any point in time & also, indicate whenever there is no match for any high/critical vendors.​	Provides real time visibility to management on third party security monitoring and remediation.​	CTPS​	Medium​	High​	1.3POT : List of active High/risk vendors ​	1. Support from Stakeholders​
-	2. Create a dashboard to show when there a dip/gap in the Panorays data for High/critical vendors, use DA to check if there is a corresponding investigation initiated by CTPS with vendors to enable targetted review of vendors and also understand 5W ,1H to assess residual risk for the process.​					2.Panorays : List of Vendors who are monitored for alerts for possible changes in the control infrastructure information. ​	
-						3.CTPS : Internal tracker/ ticketing system/ any repository, to check if there is a potential investigation initiated with any of the High/critical vendors​	
-						​	
-						The above 3 sources should help us build a dashboard to get this view of how CTPS operates with Panorays insights for High/critical vendors. ​	
+T&O - Technology Incident and Problem Management
+Advance Data Analysis for Control Operating Effectiveness Testing
+
+Three integrated Python utilities for control operating effectiveness (COE) testing within incident and problem management (IPM) audit framework at Standard Chartered Bank Group Internal Audit.
+
+Project Overview
+This project comprises three standalone Python scripts designed to perform systematic control testing across incident and problem management processes. The tools collectively validate data quality, process adherence, and control operating effectiveness by analyzing incident and change management records extracted from the service management platform.
+The suite supports the audit lifecycle by automating detection of control gaps during the fieldwork phase, enabling auditors to:
+•	Identify incidents that violate defined data quality controls
+•	Detect duplicate incident creation (a proxy for inadequate deduplication controls)
+•	Cross-reference incident-to-change relationships with timing analysis
+•	Generate exception reports for formal documentation in audit workpapers
+Scope:
+Incident population data covering the audit period, including metadata on state transitions, user assignments, categorization, and lifecycle timestamps.
+
+Audit Controls Being Tested:
+•	Mandatory field completion by incident state
+•	Duplicate incident prevention and deduplication
+•	Incident-to-change linkage timing and traceability
+
+Objective
+The primary objective is to quantify control operating effectiveness through data-driven analysis of incident and problem management records. Specifically:
+1.	Validate Mandatory Field Controls (mandatory_fields_checker.py)
+Confirm that incidents progress through defined states with all required fields populated. Control objective: Ensure data completeness and integrity at each incident lifecycle stage.
+2.	Detect Duplicate Incident Creation (duplicate_incident_catcher.py)
+Identify incidents with high similarity scores opened within a defined time window by different or same callers. Control objective: Verify that duplicate incident prevention controls are operating—e.g., deduplication workflows, intelligent matching, or caller warnings.
+3.	Analyze Incident-to-Change Linkage Timing (change_join.py)
+Cross-join incident and change records to calculate time deltas between incident creation and change resolution. Control objective: Validate that change management processes are initiated and closed in alignment with incident timelines (e.g., changes should not be closed before incidents are resolved).
+Expected Outcomes:
+•	Exception lists identifying non-compliant records
+•	Summary statistics quantifying deviation rates (e.g., X% of New incidents missing mandatory fields)
+•	Audit evidence for control testing workpapers
+•	Risk-stratified findings (high-confidence duplicates, negative time deltas, missing critical fields)
+
+Data Sources
+Primary Input Files
+1. incident_population.csv
+•	Format: Comma-separated values
+•	Scope: Complete incident population for audit period
+•	Key Columns:
+o	number – Unique incident identifier
+o	state – Incident lifecycle state (New, In Progress, Resolved, Open, etc.)
+o	caller_id, caller_id.user_name, caller_id.location – Caller/requester metadata
+o	opened_at – Incident creation timestamp
+o	short_description, description – Incident summaries
+o	category, subcategory – Taxonomic classification
+o	priority, urgency, impact – Urgency/severity ratings
+o	assignment_group, assigned_to – Ownership information
+o	business_service, u_affected_country – Business context
+o	external_client_impact, business_impact – Impact assessment
+o	resolution_code, resolution_notes – Closure documentation
+o	service, service_offering, channel – Service taxonomy
+o	work_notes, situation_manager – Audit trail and governance
+o	configuration_item – Link to asset management
+2. incident_change.xlsx (for change_join.py)
+•	Format: Microsoft Excel workbook
+•	Structure: Result of an incident-change join/merge from source systems
+•	Key Columns:
+o	number_x, impact_x, priority_x – Incident fields (left join)
+o	number_y, impact_y, priority_y – Change fields (right join)
+o	sys_created_on_x – Incident creation timestamp
+o	end_date – Change completion/resolution timestamp
+o	_x and _y suffixes distinguish incident vs. change attributes
+3. Manual Field Mapping (Hardcoded in mandatory_fields_checker.py)
+•	MANDATORY_FIELDS dictionary – State-based field requirements
+o	New: 17 mandatory fields (comprehensive intake data)
+o	In Progress: 2 fields (assignment tracking)
+o	Resolved: 3 fields (closure documentation)
+o	Open, Pending, Closed: 1–3 fields each (state-specific requirements)
+Data Assumptions:
+•	Timestamps are in mixed or standardized formats requiring parsing
+•	Null/empty values are represented as NaN or blank strings
+•	No data preprocessing applied upstream; scripts handle cleaning
+•	Column names may vary slightly (e.g., spaces vs. underscores) but scripts normalize
+
+Analysis Methodology
+1. Mandatory Fields Validation (mandatory_fields_checker.py)
+Control Test Design:
+State-based completeness testing—verifies that each incident in a given state contains all fields mandated for that state.
+Methodology:
+1.	Data Ingestion & Normalization
+o	Read CSV/Excel file
+o	Normalize column names to lowercase with underscores (handles spacing/case variations)
+o	Create mapping of normalized names to original column names for retrieval
+2.	State-Based Field Enumeration
+o	For each row, extract the state field value
+o	Look up corresponding field requirements in MANDATORY_FIELDS dictionary
+o	Handle edge cases:
+	Empty state → flag as anomaly
+	Unknown state → flag and document
+	Missing required column entirely → add to missing fields list
+3.	Null/Empty Detection
+o	For each required field, check if value is NaN or blank string
+o	Both represent missing data in audit context
+o	Case: Required field exists as column but is unpopulated for a row → violation
+4.	Anomaly Flagging
+o	Collect all incidents with ≥1 missing mandatory field
+o	Record row number (Excel-compatible, 1-based) and list of missing field names
+o	Preserve full row data for context
+5.	Output Generation
+o	Summary statistics: Total rows, valid rows, anomalies
+o	Exception report (Excel): All anomalies + metadata columns
+o	Show sample of first 10 anomalies with field names
+Test Coverage:
+•	Tests control objective: "All incidents must have complete required data for their state"
+•	Detects: Missing fields, incomplete transitions, data entry failures
+•	Not tested: Field value validity (e.g., invalid category codes), cross-field logic, formatting
+Risk Assessment:
+•	High: Critical fields missing (e.g., short_description, assignment_group)
+•	Medium: Metadata fields missing (e.g., business_impact, situation_manager)
+•	Low: Optional context fields missing
+
+2. Duplicate Incident Detection (duplicate_incident_catcher.py)
+Control Test Design:
+Pattern-matching analysis to identify incidents created with high similarity within a defined time window. Serves as a proxy test for the effectiveness of duplicate prevention/deduplication controls.
+Methodology:
+1.	Temporal Ordering & Windowing
+o	Parse opened_at timestamps to datetime objects
+o	Sort incidents chronologically
+o	For each incident i, define a time window: [opened_at, opened_at + 24 hours]
+o	Identify all subsequent incidents j where opened_at falls within window
+2.	Text Similarity Analysis (via SequenceMatcher)
+o	For candidate incident pairs, compare:
+	short_description fields
+	description fields
+o	Use difflib's SequenceMatcher to calculate character-level similarity ratios
+o	Normalize both strings to lowercase before comparison
+o	Handle null/missing text gracefully (no comparison if either is NaN)
+3.	Structural Attribute Matching
+o	Compare categorical attributes:
+	category (exact match: binary 0/1)
+	subcategory (exact match: binary 0/1)
+	priority (exact match: binary 0/1)
+	caller_location (exact match: binary 0/1)
+	business_service (exact match: binary 0/1)
+	u_affected_country (exact match: binary 0/1)
+o	Calculate proportion of matching attributes (0–1.0)
+4.	Composite Scoring
+o	Text similarity component:
+Average of available (short_description, description) similarity scores
+Weight: 60%
+o	Attribute matching component:
+Ratio of matching attributes ÷ total attributes (6)
+Weight: 40%
+o	Overall score = (text_sim × 0.6) + (attr_match × 0.4)
+Range: 0–1.0
+5.	Threshold & Flagging
+o	Flag pair as potential duplicate if overall_score ≥ 0.8 (configurable)
+o	Higher threshold (e.g., 0.9) = high-confidence duplicates only
+o	Lower threshold (e.g., 0.7) = broader net, includes possible false positives
+6.	Caller & Timing Context
+o	Capture incident numbers, caller names, caller IDs
+o	Note if callers differ (flag: different_callers)
+o	Calculate time delta in hours
+o	Record component scores for transparency
+7.	Sorting & Output
+o	Sort results by overall_similarity_score (descending) and time_difference_hours (ascending)
+o	Highest-confidence duplicates appear first
+o	Close temporal proximity + high similarity = highest risk
+Test Coverage:
+•	Tests control objective: "Duplicate incidents should not be created; deduplication controls prevent and/or resolve duplicates"
+•	Detects: Similar incidents by multiple callers (possible ticket splitting), same caller repeat submissions, and systematic duplicates (e.g., auto-generated escalations)
+•	Not tested: Whether duplicates were later merged, consolidation timeliness, root cause analysis
+Risk Assessment:
+•	High Risk: Overall_score ≥ 0.9, different_callers = True, time_delta < 2 hours
+(Indicates control breakdown; tickets for same issue opened independently)
+•	Medium Risk: 0.8 ≤ overall_score < 0.9, multiple matches per incident
+(Suggests weakening deduplication effectiveness)
+•	Low Risk: 0.8 ≤ overall_score < 0.85, same_caller, time_delta > 8 hours
+(Possible legitimate resubmission or follow-up ticket)
+
+3. Incident-to-Change Timing Analysis (change_join.py)
+Control Test Design:
+Cross-process timing validation—ensures change management timestamps align logically with incident resolution timelines. Control objective: Changes should not be closed before related incidents are resolved.
+Methodology:
+1.	DateTime Parsing & Cleaning
+o	Accept multiple datetime formats (dd-mm-yyyy, yyyy-mm-dd, dd/mm/yyyy, mm/dd/yyyy, with/without seconds)
+o	Detect format by presence of / vs. - and attempt parsing
+o	Return null/None if parsing fails
+o	Handle edge cases: empty strings, whitespace, NaN
+2.	Time Delta Calculation
+o	Calculate: difference_timedelta = end_date_clean - sys_created_on_x_clean
+o	Convert to multiple units:
+	Total seconds
+	Total minutes
+	Total hours
+	Total days
+o	Extract component breakdown (days, hours, minutes, seconds)
+	Handles negative values (e.g., change closed before incident created)
+	Apply sign to highest non-zero component for clarity
+3.	Human-Readable Formatting
+o	Format timedelta as "XdYhZmWs" for readability in audit workpapers
+o	E.g., "5d 3h 22m" for 5 days, 3 hours, 22 minutes
+o	Negative values prefixed: "-3h 15m" (change closed 3 hours 15 minutes before incident)
+4.	Data Joining & Selection
+o	Merge incident-change data on implicit join (expected to be pre-joined in Excel)
+o	Preserve original timestamps + cleaned timestamps for audit trail
+o	Select output columns for final workpaper:
+	Incident metadata (number, impact, priority, created, resolved)
+	Change metadata (number, impact, priority)
+	Calculated deltas (formatted + component + totals in all units)
+5.	Summary Statistics
+o	Count records with both dates populated (valid deltas)
+o	Count missing end_dates (changes not yet closed)
+o	Count parsing errors in created date
+o	Descriptive statistics on valid time deltas:
+	Mean, median, min, max, std deviation (in hours)
+6.	Exception Identification
+o	Largest positive deltas: Changes closed much later than incident creation (investigate if changes were properly linked)
+o	Negative deltas: Change closed before incident opened (data quality issue or unrelated change)
+o	Smallest/zero deltas: Change closed same time as incident (possible control automation)
+Test Coverage:
+•	Tests control objective: "Incident and change lifecycle processes are coordinated; changes are resolved in alignment with incident resolution"
+•	Detects: Timing anomalies, unlinked incidents/changes, process delays, data quality issues
+•	Not tested: Causal relationships (whether change actually resolved the incident), change approval quality, root cause alignment
+Risk Assessment:
+•	High Risk: Negative time delta (change closed before incident created)
+OR change closed >30 days before incident resolved
+(Suggests unlinked records or process breakdown)
+•	Medium Risk: Change closed 1–30 days before incident created
+(Possible data quality or timing issue)
+•	Low Risk: Change closed after incident created and within expected SLA window
+(Normal process flow)
+
+Technical Tools and Techniques
+Programming Language & Libraries
+Python 3.x
+•	pandas – Data manipulation, CSV/Excel I/O, datetime handling
+•	numpy – Numerical operations (aggregation, statistics)
+•	difflib – Text similarity via SequenceMatcher (character-level fuzzy matching)
+•	datetime, timedelta – Timestamp parsing and arithmetic
+•	openpyxl – Excel file writing (pandas backend)
+Architecture & Design Patterns
+1. Modular Function Design
+Each script is organized into discrete, testable functions:
+•	parse_datetime() – Handles multi-format timestamp parsing
+•	text_similarity() – Wraps SequenceMatcher for reusability
+•	detect_duplicate_incidents() – Core duplicate detection algorithm
+•	validate_incidents() – State-based completeness checking
+•	process_data() – Main ETL pipeline
+Benefit: Functions can be tested independently, reused across scripts, and modified without affecting calling code.
+2. Configuration-Driven Logic
+Mandatory field definitions are externalized into a dictionary (MANDATORY_FIELDS), allowing state-based rules to be updated without code changes.
+MANDATORY_FIELDS = {
+    'New': ['number', 'state', 'caller', ...],
+    'In Progress': ['assignment_group', 'assigned_to'],
+    ...
+}
+Benefit: Audit rules can be updated without redeploying code; supports version control of requirements.
+3. Exception-Driven Reporting
+Rather than filtering compliant records, scripts collect anomalies explicitly, preserving full context for investigation.
+anomalies = []  # Collect non-compliant records
+# ... processing ...
+anomaly_df = pd.DataFrame(anomalies)  # Convert to audit report
+Benefit: Audit workpaper directly lists exceptions; auditors don't have to infer violations.
+4. Composite Scoring (Duplicate Detection)
+Text + attribute similarity weighted combination (60/40 split) provides transparency on what drives duplicate flagging.
+overall_score = (text_sim * 0.6 + attr_match * 0.4)
+Benefit: Auditors can explain flagging rationale; weights can be tuned based on risk appetite.
+________________________________________
+Data Processing Techniques
+Text Similarity: Sequence Matching
+Algorithm: Difflib SequenceMatcher—character-level longest contiguous matching subsequence.
+Rationale:
+•	No external NLP library dependencies (lightweight)
+•	Works across multiple languages
+•	Case-insensitive comparison
+•	Handles partial matches (e.g., "Email not working" vs. "Email system down" = ~75% match)
+Limitations:
+•	Order-sensitive (doesn't handle word rearrangement well)
+•	Threshold (0.8) tuned for incident description similarity; may need adjustment for other domains
+Example:
+"Network connectivity issue in NYC office" vs. "NYC office: network down"
+SequenceMatcher similarity ≈ 0.72 → Below 0.8 threshold (not flagged as duplicate alone)
+Temporal Analysis: Time Windows
+Pattern: Sort by timestamp, then iterate forward looking for candidates within window.
+Rationale:
+•	Efficient O(n) to O(n²) depending on window size and duplicate density
+•	Mimics how humans detect duplicates: "Did someone just report this?"
+•	Time window (default 24 hours) configurable per organizational SLA
+Optimization Note: Current implementation iterates all pairs; for very large datasets (>100k rows), could use pandas merge on binned time ranges or a spatial index (BTree).
+Field Validation: Column Normalization
+Technique: Normalize column names to lowercase + underscore, then map to original names for retrieval.
+Rationale:
+•	Handles variations in exported data (spaces, case, special chars)
+•	Preserves original column names for output (maintains audit trail)
+•	Supports partial column name matching if needed
+col_mapping = {normalize_column_name(col): col for col in df.columns}
+# 'Caller ID' → 'caller_id' (key) → 'Caller ID' (original, for retrieval)
+DateTime Parsing: Multi-Format Tolerance
+Technique: Try parsing with most-common format first; fall back to alternates on exception.
+Rationale:
+•	Service management exports often have inconsistent datetime formats
+•	Avoids forcing users to pre-clean data
+•	Order of formats matters (most restrictive/common first)
+formats = [
+    '%d-%m-%Y %H:%M:%S',  # Try first (most common in audit data)
+    '%Y-%m-%d %H:%M:%S',  # Try second
+    # ... alternates ...
+]
+
+Output & Reporting
+Exception Reports (Excel/CSV)
+•	Format: Flat tables with one row per anomaly
+•	Columns: Original data + audit metadata (_missing_fields, _row_number, similarity_score, etc.)
+•	Sorting: By severity/risk (highest score first, earliest timestamp first, etc.)
+•	Integration: Copy directly into audit workpapers or dashboard
+Summary Statistics (Console/Text)
+•	Count metrics: Total, valid, anomalies, high-confidence subsets
+•	Distribution metrics: Mean, median, min, max, std dev
+•	Sample data: First N rows of exceptions for spot-check review
+Transparency & Auditability
+•	Original + Cleaned columns: Preserve source data; show transformation
+•	Component scores: Break down composite scores for reviewability
+•	Timestamp trails: Record when analysis ran, data sources, version info
