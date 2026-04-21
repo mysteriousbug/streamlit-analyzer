@@ -1,6 +1,6 @@
 Hi team,
 
-Following the call for T&O TV stories on how colleagues are delivering T&O 30, I'd like to submit the below from our ICS Audit team. It covers three innovations we've shipped over the last few quarters, each mapping to a different strategic focus area — strengthening the core, specialising at scale, and enabling innovation.
+Following the call for T&O TV stories on how colleagues are delivering T&O 30, I'd like to submit the below from our ICS Audit team. It covers three innovations from the last few quarters, each mapping to a different strategic focus area — strengthening the core, specialising at scale, and enabling innovation.
 
 Happy to refine, shorten, or adapt this into a script for a talking-head video if that's the preferred format. Just let me know what works best.
 
@@ -10,35 +10,35 @@ Happy to refine, shorten, or adapt this into a script for a talking-head video i
 
 *By Ananya Aithal, Graduate Programme Associate — ICS Audit, GBS Bangalore*
 
-When I joined the Information & Cybersecurity Audit team under Mo, I was struck by one thing: how much of what we do is ripe for reinvention. Audit is traditionally seen as paper-heavy, manual, and reactive — but over the last few months, our team has been quietly proving the opposite. Here are three innovations we've delivered that I'm especially proud of, each mapping directly to T&O 30's pillars of strengthening the core, specialising at scale, and enabling innovation.
+When I joined the Information & Cybersecurity Audit team under Mo, I was struck by one thing: how much of what we do is ripe for reinvention. Audit is traditionally seen as paper-heavy, manual, and reactive — but over the last few months, our team has been quietly proving the opposite. Here are three innovations I'm especially proud of, each mapping directly to T&O 30's pillars of strengthening the core, specialising at scale, and enabling innovation.
 
-**1. The AI Squad — Building UC-01, our Agentic AI Audit Workpaper Assistant**
+**1. The AI Squad — Building an Agentic AI Audit Workpaper Assistant**
 
 A typical control walkthrough generates hours of Teams transcripts, supporting documents, and unstructured notes that an auditor then has to manually distil into a Risk Control Matrix and workpaper — often a 2-3 hour exercise per control. We asked: what if AI could do the first draft?
 
-UC-01 is exactly that. It's a Streamlit application powered by Groq/Llama with persistent SQLite storage that ingests multiple walkthrough transcripts and supporting documents per control, runs a multi-turn agentic extraction pipeline, and produces a GIA-compliant draft workpaper — RCM rows, suggested CDE/COE/DA test procedures, and AI-generated conclusions with confidence scoring. The auditor stays firmly in the driver's seat, reviewing and overriding wherever needed, but the blank-page problem disappears. Target impact: bringing draft workpaper creation down from hours to roughly 30 minutes per control.
+The assistant we're building is exactly that. It's a Streamlit application powered by Groq/Llama with persistent SQLite storage that ingests multiple walkthrough transcripts and supporting documents per control, runs a multi-turn agentic extraction pipeline, and produces a GIA-compliant draft workpaper — RCM rows, suggested CDE/COE/DA test procedures, and AI-generated conclusions with confidence scoring. The auditor stays firmly in the driver's seat, reviewing and overriding wherever needed, but the blank-page problem disappears. Target impact: bringing draft workpaper creation down from hours to roughly 30 minutes per control.
 
 **2. The DA Squad — Bringing advanced analytics into every audit, in-house**
 
-Rather than treating Data Analytics as a bolt-on, our DA squad has embedded it into the heart of our audit engagements — and built every tool ourselves, in Python. A few highlights from the last few quarters:
+Rather than treating Data Analytics as a bolt-on, our DA squad has embedded it into the heart of our audit engagements — and built every tool ourselves, in Python. A few highlights from across our recent audits:
 
-- *Privileged Access Management audit:* Cross-referenced the EID Report against CyberArk vault inventories and native database privilege exports across 340 instances, surfacing a previously invisible MongoDB unvaulting gap that wasn't caught by the standard CyberArk discovery scan.
-- *DAM coverage analysis:* Cross-sheet pandas analysis across DB2, MongoDB, PostgreSQL, SQL Server, and Oracle environments comparing native database audit logs against Imperva SecureSphere DAM coverage, OneVault session management, and unvaulted accounts — turning three disconnected spreadsheets into a single risk-ranked view by hostname.
-- *IPM (Incident & Problem Management) audit:* Three integrated Python utilities for COE testing — a mandatory-fields checker, a duplicate incident catcher using similarity scoring, and an incident-to-change linkage analyser — giving us 100% population coverage instead of sample-based testing.
-- *Vendor EOS/EOL tracking:* A Python tool built on the endoflife.date API that automatically validates vendor end-of-support dates against our internal obsolescence data across 200+ products.
-- *Control framework mapping:* An AI-powered Streamlit app that maps 56 SCB controls to NIST SP 800-53, CIS Controls v8, and ISO 27001 with confidence scoring — built for the CFL Gap Analysis project under the TPSA audit.
+- *DLP audit:* A Streamlit web app and supporting URL-testing methodology covering DLP coverage, policy currency, and FTP infrastructure assessment.
+- *TPSA audit (CFL Gap Analysis):* An AI-powered control framework mapping engine that maps 56 SCB controls to NIST SP 800-53, CIS Controls v8, and ISO 27001 with confidence scoring — and an ISRR automation pipeline.
+- *IPM audit:* Three integrated Python utilities for COE testing — a mandatory-fields checker, a duplicate incident catcher using similarity scoring, and an incident-to-change linkage analyser — giving us 100% population coverage instead of sample-based testing.
+- *Catalyst audit:* Advanced data analytics testing tailored to the engagement's specific control objectives.
+- *GDCE audit:* A vulnerable port exposure detector and a 4-script pipeline for IP/subnet enrichment, environment segregation testing, and ITAM asset traceability across 17,000+ firewall rules.
 
 The common thread: we're no longer waiting for someone else to build the tooling. We're shipping it ourselves, audit by audit.
 
 **3. The Quantum Cryptography Workshop — Getting ahead of the next big threat**
 
-In March, I delivered a 50-minute workshop to bank leadership, internal audit, and technology stakeholders on quantum cryptography and its implications for the bank. It used a 5W-1H structure and combined a strategic briefing with a live Qiskit demo of the BB84 quantum key distribution protocol, including eavesdropping detection via the QBER threshold.
+On 30 April, I'll be delivering a 50-minute workshop to bank leadership, internal audit, and technology stakeholders on quantum cryptography and its implications for the bank. It uses a 5W-1H structure and combines a strategic briefing with a live Qiskit demo of the BB84 quantum key distribution protocol, including eavesdropping detection via the QBER threshold.
 
-We covered the "Harvest Now, Decrypt Later" threat, NIST's post-quantum standards (ML-KEM, ML-DSA, SLH-DSA), audit-readiness frameworks like QRAMM and Mosca scoring, and a hybrid PQC-plus-QKD deployment roadmap. The goal wasn't to turn auditors into physicists — it was to make sure that when quantum risk lands on our risk register (and it will), our team is the one already asking the right questions.
+We'll cover the "Harvest Now, Decrypt Later" threat, NIST's post-quantum standards (ML-KEM, ML-DSA, SLH-DSA), audit-readiness frameworks like QRAMM and Mosca scoring, and a hybrid PQC-plus-QKD deployment roadmap. The goal isn't to turn auditors into physicists — it's to make sure that when quantum risk lands on our risk register (and it will), our team is the one already asking the right questions.
 
 **Why this matters for T&O 30**
 
-These three initiatives aren't isolated experiments. UC-01 enables innovation by reimagining how we produce core audit deliverables. The DA squad strengthens the core by raising the floor on what every audit can do with data. And the quantum workshop is exactly what specialising at scale looks like — building deep expertise in one corner of the bank and sharing it broadly.
+These three initiatives aren't isolated experiments. The AI workpaper assistant enables innovation by reimagining how we produce core audit deliverables. The DA squad strengthens the core by raising the floor on what every audit can do with data. And the quantum workshop is exactly what specialising at scale looks like — building deep expertise in one corner of the bank and sharing it broadly.
 
 Audit doesn't have to be slow. With the right tools, the right curiosity, and a manager who backs the experiments, it can be one of the most innovative places to work in the bank.
 
