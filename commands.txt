@@ -1,11 +1,3 @@
-can you come up with these section for my ppt? note that all these will fit exactly 1 slide - so keep the length of content in mind.
-1. slide title
-2. problem statement (include the risk factor also here)
-3. description
-4. primary datasets
-5. anticipated value and benefits
-5a. functional value add
-5b. benefits
-6. solution
-mention the scalability aspect - how we can run this on any system, for any number of incidents, and different applications - how easily we can run on someone else's system
-7. relevant picture/graph
+T&O TV your new one stop destination for everything T&O 30. Click 'play' and learn more about the strategy through stories, perspectives and moments from our T&O colleagues.
+ 
+The content on T&O TV will grow as we come together to deliver T&O 30. Do you have a story to share about the part you are playing in delivering our strategic focus areas of strengthening the core, specialising at scale or enabling innovation? If so we want to hear about it.
