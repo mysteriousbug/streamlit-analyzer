@@ -1,18 +1,43 @@
-I have two two excel files:
-1. product_list_input.xlsx with the following columns:
-{Source Date,Source,Host Index,Product Instance Index,Is In Scope Host,Is In Scope Instance,Is In TDR,Is In CTDR-Input,Is In CTDR-Output,Sys Id,Name,Serial Number,Name With Serial Number,Class,Asset Type,Operational Status,Hardware Status,Environment,Is Virtual,Is Appliance,Swift,Device Risk Rating,Device Criticality,Warranty Expiration,Support Group,Managed By Group,Location,Loc Set ID,City,Country,Region,Cluster,Location Group,Client Segment,ITO Unit,CI ID,Application Name,CI ID With Application Name,Application Install Status,Business Criticality,Security BIA,IBS,Critical App,Internet Facing Application,Current Residual Risk Rating,GRAM Likelihood,Host Contributing To Material Risk - O&T,O&T Risk Host,ICS Risk Host,Host With Material Risk,AS Sys ID,Application Service,Subscribed By Locations,Remediation Date,Remediation Funding Status,Remediation Action,Initiative Delivering The Remediation,Remediation Comments,Remediation Status,Remediation Plan Quarter Year,Product Name,Product EOS Date Status,Product EOES Date,Is Extended Support,Product EOS Year,Product Obsolescence Year,Product Core Obsolescence Year,Product Critical Obsolescence Year,Product Group,Is CMP,Hardware Sys ID,Hardware Model Name,Hardware Model Number,OS,OS Version,OS Normalized Product,OS Normalized Version,OS Prioritization Category,Is Unpatchable OS,Software Product Type,Software Product Classification,Software Publisher,Software Product,Software Version,Software Full Version,Software Edition,Cloud Sys ID,Cloud Vendor,Cloud Service,Cloud Service Version,Cloud Resource ID,Is Baseline 2025,Shared Host Status,Initiative Remediation Status,Remediation Date (Month Index),Remediation Date (Month),Forecast Exclusion Date,Cloud Investment Category,Subproduct Group}
+we need to build an audit scheduling assistant. the inputs to the scheduler are the following files:(note that each of the excel workbooks have 3 sheets one for team ICS, one for team T&A, and one for team DM)
+1. leave_tracker.xlsx
+**contains the days on which each auditor will be on leave**
+in each sheet we will have the following columns:
+Auditor Planned_Leaves
+SAM/AuditorName1 12 Aug-14 Aug, 30 Oct-12 Nov
+AM/AuditorName2 1 May - 3 May
+(there could be only 3 roles here - SAM (senior audit manager), AM (audit manager), Co-Source)
 
-2. problem_tickets.xlsx with the following columns:
-{number,active,activity_due,additional_assignee_list,approval,approval_history,assigned_to,assignment_group,business_duration,priority,work_notes,work_notes_list,time_worked,sys_class_name,close_notes,u_remarks_reason_for_delays,impact,fix_notes,cause_notes,work_end,work_start,sys_created_by,due_date,calendar_duration}
+2. skills.xlsx
+**contains the skills and certifications of each auditor**
+in each sheet we will have the following columns:
+Auditor Skills Certifications
+SAM/AuditorName1 Python, Red-Teaming ICAEW
 
-i need to join the se two tables based on the criteria: Application Service column from Product List table join with Configuration Item column from Problem table, and then perform the following Data Analysis Tests:
-Below is the breakdown of the test:
-	by aging buckets and CTDR-Output vs TDR
-	total number of problem tickets
-	number of problem tickets by impact 1 to 4
-	monthly average problem tickets occured 6 months before EOS date
-	monthly average problem tickets occured of each impact type, 6 months before EOS date
-	monthly average problem tickets occured after EOS date
-	monthly average problem tickets occured of each impact type, after EOS date aging with related problem tickets frequency and severity
+3. planned_audits.xlsx
+**which is a list of audits planned for that year along with how many days are allocated for each team.**
+in each sheet we will have the following columns:
+Audit Number	TITLE	Audit Primary Team	REPORT ISSUANCE PLANNED	Analytics Used	Total Auditor Days	Reporting Quarter	Team Lead
+2026-GT-XXX	AWS Pooled Audit	T&A	26/01/2026	No	130	Q1	AuditorName1
 
-I want you to export the result in both excel and powerBI dashboard (for visualization) or streamlit+matplotlib.
+if the Audit Primary Team is T&A, and total auditor days is 130, majority auditor days should be given to T&A, say 60, then 40 to ICS and 30 to DM. similarly, if Audit Primary Team is DM, and total auditor days is 160, majority auditor days should be given to DM, say 80, then the rest to any other team. 
+
+Note that only SAMs can be Team Leads
+
+4. planned_assignments.xlsx
+***contains the list of audits that were assigned to that person previously. this will help us determine who is the best fit for repeated audit (since they have previously covered that domain)
+Auditor	Jan-26				Feb-26				Mar-26					Apr-26				May-26				Jun-26				Jul-26					Aug-26					Sep-26				Oct-26				Nov-26					Dec-26			
+	5/Jan	12/Jan	19/Jan	26/Jan	2/Feb	9/Feb	16/Feb	23/Feb	2/Mar	9/Mar	16/Mar	23/Mar	30/Mar	6/Apr	13/Apr	20/Apr	27/Apr	4/May	11/May	18/May	25/May	1/Jun	8/Jun	15/Jun	22/Jun	29/Jun	6/Jul	13/Jul	20/Jul	27/Jul	3/Aug	10/Aug	17/Aug	24/Aug	31/Aug	7/Sep	14/Sep	21/Sep	28/Sep	5/Oct	12/Oct	19/Oct	26/Oct	2/Nov	9/Nov	16/Nov	23/Nov	30/Nov	7/Dec	14/Dec	21/Dec	28/Dec
+SAM/ AuditorName1			Availability and Security of Network (FW and Segmentation)									Active Directory				Active Directory							Active Directory		HK Recovery				HK Recovery				HK Recovery					GDCW Migration				GDCW Migration					GDCW Migration (Reporting - Q1 2027)					
+
+5. interests.xlsx
+**contains what audit each auditor is interested in. the audit list is used from planned_audits.xlsx. we make sure to atleast let one of her/his preferred audits to be allotted to her/him**
+Auditor Audit_Preference1 Audit_Preference2 Audit_Preference3
+SAM/AuditorName1 2026-GT-XXX 2026-GT-YYY 2026-GT-ZZZ
+
+
+notes:
+1. each audit needs to have 1 Team Lead (TL) 3-4 people. only a SAM can be a TL.
+2. we need to first look at the leaves tracker -> then look at the planned audits.
+based on the audit title, check the skill.xlsx to see who has the best match for those skills. then 
+
+
