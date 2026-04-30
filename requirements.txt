@@ -4,21 +4,34 @@
 {
 "question": "What should the output look like?",
 "options": ["Filled planned_assignments.xlsx (same week-grid format)", "New assignment summary per audit", "Both — grid + per-audit summary", "Streamlit app with editable assignments"]
+"answer": ["Both — grid + per-audit summary"]
 },
 {
 "question": "How strict is the 'one preferred audit per auditor' rule?",
 "options": ["Hard constraint — must satisfy for everyone", "Strong preference — satisfy if feasible", "Tiebreaker only — use when other factors are equal"]
+"answer": ["Strong preference — satisfy if feasible"]
 },
 {
 "question": "For the team-day split (e.g., T&A primary, 130 days → 60/40/30), who decides the exact split?",
 "options": ["Fixed formula I should define (e.g., 50/30/20)", "You'll provide the split rules", "Heuristic based on audit type — needs discussion"]
+"answer": ["Heuristic based on audit type — needs discussion"]
 }
 ]
 
 </ask_user_input_v0>
+
 A few other things I want to flag now so we can address them in your next message:
-Audit duration vs. weekly grid. planned_assignments.xlsx is a weekly grid, but planned_audits.xlsx gives total auditor-days and a report issuance date — not start date or duration. How do we infer when an audit runs? Backward from report date? Or is there a separate field I'm missing?
-Skill matching. Skills are free-text ("Python, Red-Teaming"). To match audits to skills, we either need (a) a keyword map from audit titles to required skills, or (b) an LLM layer that reads the title and infers required skills. Given your UC-01 work with Groq/Llama, I'd lean toward option (b) — but want to confirm before wiring in an API call.
-Co-Source role. You mentioned three roles (SAM, AM, Co-Source) but the assignment rules only mention SAM (TL) + "3-4 people." Are Co-Sources counted in that 3-4? Any constraint on how many Co-Sources per audit?
-Cross-team assignments. Since each audit pulls auditors from all three teams, the scheduler needs to read all three sheets of each workbook and treat the auditor pool as unified (with team tags). Confirming that's the intent.
-Capacity check. Total auditor-days across all planned audits — has anyone validated that the team has the capacity to cover it after leaves? If we hit infeasibility, should the scheduler flag it and partially solve, or fail loudly?
+1. Audit duration vs. weekly grid. planned_assignments.xlsx is a weekly grid, but planned_audits.xlsx gives total auditor-days and a report issuance date — not start date or duration. How do we infer when an audit runs? Backward from report date? Or is there a separate field I'm missing?
+convert the weekly assignment to days (1 auditor day = same as 1 normal day)
+
+2. Skill matching. Skills are free-text ("Python, Red-Teaming"). To match audits to skills, we either need (a) a keyword map from audit titles to required skills, or (b) an LLM layer that reads the title and infers required skills. Given your UC-01 work with Groq/Llama, I'd lean toward option (b) — but want to confirm before wiring in an API call.
+I can use groq
+
+3. Co-Source role. You mentioned three roles (SAM, AM, Co-Source) but the assignment rules only mention SAM (TL) + "3-4 people." Are Co-Sources counted in that 3-4? Any constraint on how many Co-Sources per audit?
+Co-sources are counted within the 3-4 days
+
+4. Cross-team assignments. Since each audit pulls auditors from all three teams, the scheduler needs to read all three sheets of each workbook and treat the auditor pool as unified (with team tags). Confirming that's the intent.
+Yes
+
+5. Capacity check. Total auditor-days across all planned audits — has anyone validated that the team has the capacity to cover it after leaves? If we hit infeasibility, should the scheduler flag it and partially solve, or fail loudly?
+Flag+partially solve
