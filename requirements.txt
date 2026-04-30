@@ -1,43 +1,24 @@
-we need to build an audit scheduling assistant. the inputs to the scheduler are the following files:(note that each of the excel workbooks have 3 sheets one for team ICS, one for team T&A, and one for team DM)
-1. leave_tracker.xlsx
-**contains the days on which each auditor will be on leave**
-in each sheet we will have the following columns:
-Auditor Planned_Leaves
-SAM/AuditorName1 12 Aug-14 Aug, 30 Oct-12 Nov
-AM/AuditorName2 1 May - 3 May
-(there could be only 3 roles here - SAM (senior audit manager), AM (audit manager), Co-Source)
+<ask_user_input_v0>
 
-2. skills.xlsx
-**contains the skills and certifications of each auditor**
-in each sheet we will have the following columns:
-Auditor Skills Certifications
-SAM/AuditorName1 Python, Red-Teaming ICAEW
+[
+{
+"question": "What should the output look like?",
+"options": ["Filled planned_assignments.xlsx (same week-grid format)", "New assignment summary per audit", "Both — grid + per-audit summary", "Streamlit app with editable assignments"]
+},
+{
+"question": "How strict is the 'one preferred audit per auditor' rule?",
+"options": ["Hard constraint — must satisfy for everyone", "Strong preference — satisfy if feasible", "Tiebreaker only — use when other factors are equal"]
+},
+{
+"question": "For the team-day split (e.g., T&A primary, 130 days → 60/40/30), who decides the exact split?",
+"options": ["Fixed formula I should define (e.g., 50/30/20)", "You'll provide the split rules", "Heuristic based on audit type — needs discussion"]
+}
+]
 
-3. planned_audits.xlsx
-**which is a list of audits planned for that year along with how many days are allocated for each team.**
-in each sheet we will have the following columns:
-Audit Number	TITLE	Audit Primary Team	REPORT ISSUANCE PLANNED	Analytics Used	Total Auditor Days	Reporting Quarter	Team Lead
-2026-GT-XXX	AWS Pooled Audit	T&A	26/01/2026	No	130	Q1	AuditorName1
-
-if the Audit Primary Team is T&A, and total auditor days is 130, majority auditor days should be given to T&A, say 60, then 40 to ICS and 30 to DM. similarly, if Audit Primary Team is DM, and total auditor days is 160, majority auditor days should be given to DM, say 80, then the rest to any other team. 
-
-Note that only SAMs can be Team Leads
-
-4. planned_assignments.xlsx
-***contains the list of audits that were assigned to that person previously. this will help us determine who is the best fit for repeated audit (since they have previously covered that domain)
-Auditor	Jan-26				Feb-26				Mar-26					Apr-26				May-26				Jun-26				Jul-26					Aug-26					Sep-26				Oct-26				Nov-26					Dec-26			
-	5/Jan	12/Jan	19/Jan	26/Jan	2/Feb	9/Feb	16/Feb	23/Feb	2/Mar	9/Mar	16/Mar	23/Mar	30/Mar	6/Apr	13/Apr	20/Apr	27/Apr	4/May	11/May	18/May	25/May	1/Jun	8/Jun	15/Jun	22/Jun	29/Jun	6/Jul	13/Jul	20/Jul	27/Jul	3/Aug	10/Aug	17/Aug	24/Aug	31/Aug	7/Sep	14/Sep	21/Sep	28/Sep	5/Oct	12/Oct	19/Oct	26/Oct	2/Nov	9/Nov	16/Nov	23/Nov	30/Nov	7/Dec	14/Dec	21/Dec	28/Dec
-SAM/ AuditorName1			Availability and Security of Network (FW and Segmentation)									Active Directory				Active Directory							Active Directory		HK Recovery				HK Recovery				HK Recovery					GDCW Migration				GDCW Migration					GDCW Migration (Reporting - Q1 2027)					
-
-5. interests.xlsx
-**contains what audit each auditor is interested in. the audit list is used from planned_audits.xlsx. we make sure to atleast let one of her/his preferred audits to be allotted to her/him**
-Auditor Audit_Preference1 Audit_Preference2 Audit_Preference3
-SAM/AuditorName1 2026-GT-XXX 2026-GT-YYY 2026-GT-ZZZ
-
-
-notes:
-1. each audit needs to have 1 Team Lead (TL) 3-4 people. only a SAM can be a TL.
-2. we need to first look at the leaves tracker -> then look at the planned audits.
-based on the audit title, check the skill.xlsx to see who has the best match for those skills. then 
-
-
+</ask_user_input_v0>
+A few other things I want to flag now so we can address them in your next message:
+Audit duration vs. weekly grid. planned_assignments.xlsx is a weekly grid, but planned_audits.xlsx gives total auditor-days and a report issuance date — not start date or duration. How do we infer when an audit runs? Backward from report date? Or is there a separate field I'm missing?
+Skill matching. Skills are free-text ("Python, Red-Teaming"). To match audits to skills, we either need (a) a keyword map from audit titles to required skills, or (b) an LLM layer that reads the title and infers required skills. Given your UC-01 work with Groq/Llama, I'd lean toward option (b) — but want to confirm before wiring in an API call.
+Co-Source role. You mentioned three roles (SAM, AM, Co-Source) but the assignment rules only mention SAM (TL) + "3-4 people." Are Co-Sources counted in that 3-4? Any constraint on how many Co-Sources per audit?
+Cross-team assignments. Since each audit pulls auditors from all three teams, the scheduler needs to read all three sheets of each workbook and treat the auditor pool as unified (with team tags). Confirming that's the intent.
+Capacity check. Total auditor-days across all planned audits — has anyone validated that the team has the capacity to cover it after leaves? If we hit infeasibility, should the scheduler flag it and partially solve, or fail loudly?
